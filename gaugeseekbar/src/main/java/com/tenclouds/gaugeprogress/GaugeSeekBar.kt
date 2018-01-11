@@ -6,6 +6,7 @@ import android.graphics.Canvas
 import android.graphics.PointF
 import android.util.AttributeSet
 import android.view.View
+import com.tenclouds.gaugeseekbar.R
 
 class GaugeSeekBar : View {
 
@@ -18,11 +19,11 @@ class GaugeSeekBar : View {
 
     constructor(context: Context) : super(context)
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
-        applyAttributes(context.theme.obtainStyledAttributes(attrs, R.styleable.GaugeProgressBar, 0, 0))
+        applyAttributes(context.theme.obtainStyledAttributes(attrs, R.styleable.GaugeSeekBar, 0, 0))
     }
 
     constructor(context: Context, attrs: AttributeSet?, defStyle: Int) : super(context, attrs, defStyle) {
-        applyAttributes(context.theme.obtainStyledAttributes(attrs, R.styleable.GaugeProgressBar, 0, 0))
+        applyAttributes(context.theme.obtainStyledAttributes(attrs, R.styleable.GaugeSeekBar, 0, 0))
     }
 
     private var thumbRadius = DEFAULT_THUMB_RADIUS_DP * resources.displayMetrics.density
@@ -58,17 +59,17 @@ class GaugeSeekBar : View {
 
     private fun applyAttributes(attributes: TypedArray) {
         try {
-            thumbRadius = attributes.getDimension(R.styleable.GaugeProgressBar_thumbRadius, thumbRadius)
-            trackColor = attributes.getColor(R.styleable.GaugeProgressBar_trackColor, trackColor)
-            showThumb = attributes.getBoolean(R.styleable.GaugeProgressBar_showThumb, showThumb)
-            trackWidth = attributes.getDimension(R.styleable.GaugeProgressBar_trackWidth, trackWidth)
-            progress = attributes.getFloat(R.styleable.GaugeProgressBar_progress, 0f)
+            thumbRadius = attributes.getDimension(R.styleable.GaugeSeekBar_thumbRadius, thumbRadius)
+            trackColor = attributes.getColor(R.styleable.GaugeSeekBar_trackColor, trackColor)
+            showThumb = attributes.getBoolean(R.styleable.GaugeSeekBar_showThumb, showThumb)
+            trackWidth = attributes.getDimension(R.styleable.GaugeSeekBar_trackWidth, trackWidth)
+            progress = attributes.getFloat(R.styleable.GaugeSeekBar_progress, 0f)
 
-            val gradientArrayResourceId = attributes.getResourceId(R.styleable.GaugeProgressBar_progressGradient, 0)
+            val gradientArrayResourceId = attributes.getResourceId(R.styleable.GaugeSeekBar_progressGradient, 0)
             if (gradientArrayResourceId != 0) {
                 gradientArray = resources.getIntArray(gradientArrayResourceId)
             }
-            val gradientArrayPositionsResourceId = attributes.getResourceId(R.styleable.GaugeProgressBar_progressGradientPositions, 0)
+            val gradientArrayPositionsResourceId = attributes.getResourceId(R.styleable.GaugeSeekBar_progressGradientPositions, 0)
             if (gradientArrayPositionsResourceId != 0) {
                 val positionsIntArray = resources.getIntArray(gradientArrayPositionsResourceId)
                 gradientArrayPositions = FloatArray(positionsIntArray.size) { positionsIntArray[it].div(100f) }
