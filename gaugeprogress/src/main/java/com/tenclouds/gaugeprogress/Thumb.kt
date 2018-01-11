@@ -12,7 +12,7 @@ class Thumb(centerPosition: PointF,
             private val thumbRadius: Float,
             gradientArrayPositions: FloatArray? = null) : DrawableEntity(centerPosition) {
 
-    private val gradientPositionsArray: FloatArray = gradientArrayPositions ?: FloatArray(gradientArray.size) { it.toFloat() / gradientArray.size }
+    private val gradientPositionsArray: FloatArray = gradientArrayPositions ?: FloatArray(gradientArray.size) { it.toFloat() / (gradientArray.size - 1) }
 
     companion object {
         private const val DEGREE_TO_RADIAN_RATIO = 0.0174533
