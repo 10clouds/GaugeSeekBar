@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/GaugeProgressBar.iml" filepath="$PROJECT_DIR$/GaugeProgressBar.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gaugeprogress/gaugeprogress.iml" filepath="$PROJECT_DIR$/gaugeprogress/gaugeprogress.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sampleapp/app.iml" filepath="$PROJECT_DIR$/sampleapp/app.iml" />
+    </modules>
+  </component>
+</project>
