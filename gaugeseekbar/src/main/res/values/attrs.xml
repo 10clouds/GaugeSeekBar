@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="GaugeProgressBar">
+    <declare-styleable name="GaugeSeekBar">
         <attr name="thumbRadius" format="dimension" />
         <attr name="showThumb" format="boolean" />
         <attr name="trackColor" format="color" />

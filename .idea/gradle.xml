@@ -8,7 +8,7 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/gaugeprogress" />
+            <option value="$PROJECT_DIR$/gaugeseekbar" />
             <option value="$PROJECT_DIR$/sampleapp" />
           </set>
         </option>

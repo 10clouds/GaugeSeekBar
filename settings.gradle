@@ -1,1 +1,1 @@
-include ':sampleapp', ':gaugeprogress'
+include ':sampleapp', ':gaugeseekbar'

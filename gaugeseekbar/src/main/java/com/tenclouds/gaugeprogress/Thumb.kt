@@ -65,7 +65,7 @@ class Thumb(centerPosition: PointF,
     }
 
     private fun getColorForPercent(progress: Float): Int {
-        return if (progress < 1f) {
+        return if (progress < 1f && gradientArray.size > 1) {
             val startIndex = gradientPositionsArray.indexOfLast { progress >= it }
             val endIndex = if (startIndex + 1 < gradientPositionsArray.size) startIndex + 1 else gradientPositionsArray.size - 1
             val startPosition = gradientPositionsArray[startIndex]

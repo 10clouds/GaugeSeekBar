@@ -19,12 +19,17 @@ class ProgressDrawable(position: PointF,
     }
 
     private val progressPaint = Paint().apply {
-        val shader = createSweepGradient()
         strokeWidth = trackWidthPx
         isAntiAlias = true
         strokeCap = Paint.Cap.ROUND
         style = Paint.Style.STROKE
-        setShader(shader)
+
+        if(gradientArray.size > 1) {
+            val shader = createSweepGradient()
+            setShader(shader)
+        } else {
+            color = gradientArray[0]
+        }
     }
 
     private fun createSweepGradient(): SweepGradient {

@@ -7,7 +7,7 @@ import android.graphics.PointF
 import android.util.AttributeSet
 import android.view.View
 
-class GaugeProgressBar : View {
+class GaugeSeekBar : View {
 
     private companion object {
         private const val START_ANGLE_DEG = 30f
@@ -91,7 +91,7 @@ class GaugeProgressBar : View {
         val margin = Math.max(thumbRadius, trackWidth / 2f)
         track = Track(centerPosition, radiusPx, margin, trackColor, START_ANGLE_DEG, trackWidth)
         progressDrawable = ProgressDrawable(centerPosition, 0f, radiusPx, margin, gradientArray, START_ANGLE_DEG, trackWidth, gradientArrayPositions)
-        thumb = Thumb(centerPosition, 0f, context.resources.getIntArray(R.array.index_gradient), START_ANGLE_DEG, thumbRadius)
+        thumb = Thumb(centerPosition, 0f, gradientArray, START_ANGLE_DEG, thumbRadius)
     }
 
     override fun onDraw(canvas: Canvas?) {
