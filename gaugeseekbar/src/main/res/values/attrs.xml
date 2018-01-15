@@ -3,7 +3,8 @@
     <declare-styleable name="GaugeSeekBar">
         <attr name="thumbRadius" format="dimension" />
         <attr name="showThumb" format="boolean" />
-        <attr name="trackColor" format="color" />
+        <attr name="trackGradient" format="color" />
+        <attr name="trackGradientPositions" format="reference" />
         <attr name="progress" format="float" />
         <attr name="trackWidth" format="dimension" />
         <attr name="progressGradient" format="reference" />
