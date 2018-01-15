@@ -1,9 +1,6 @@
 package com.tenclouds.gaugeprogress
 
-import android.graphics.Canvas
 import android.graphics.PointF
+import android.graphics.drawable.Drawable
 
-abstract class DrawableEntity(protected var centerPosition: PointF) {
-
-    abstract fun draw(canvas: Canvas)
-}
+abstract class DrawableEntity(protected var centerPosition: PointF) : Drawable()

@@ -1,9 +1,6 @@
 package com.tenclouds.gaugeprogress
 
-import android.graphics.Canvas
-import android.graphics.Paint
-import android.graphics.PointF
-import android.graphics.RectF
+import android.graphics.*
 
 class Track(centerPosition: PointF,
             private val radiusPx: Float,
@@ -31,4 +28,10 @@ class Track(centerPosition: PointF,
                 false,
                 paint)
     }
+
+    override fun setAlpha(alpha: Int) {}
+
+    override fun getOpacity(): Int = PixelFormat.TRANSLUCENT
+
+    override fun setColorFilter(colorFilter: ColorFilter?) {}
 }

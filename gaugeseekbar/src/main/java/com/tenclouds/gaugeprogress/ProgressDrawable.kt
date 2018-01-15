@@ -68,4 +68,10 @@ class ProgressDrawable(position: PointF,
                     progressPaint)
         }
     }
+
+    override fun setAlpha(alpha: Int) {}
+
+    override fun getOpacity(): Int = PixelFormat.TRANSLUCENT
+
+    override fun setColorFilter(colorFilter: ColorFilter?) {}
 }

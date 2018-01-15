@@ -1,9 +1,6 @@
 package com.tenclouds.gaugeprogress
 
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.Paint
-import android.graphics.PointF
+import android.graphics.*
 
 class Thumb(centerPosition: PointF,
             var progress: Float,
@@ -83,5 +80,12 @@ class Thumb(centerPosition: PointF,
             gradientArray.last()
         }
     }
+
+    override fun setAlpha(alpha: Int) {}
+
+    override fun getOpacity(): Int = PixelFormat.TRANSLUCENT
+
+    override fun setColorFilter(colorFilter: ColorFilter?) {}
+
 
 }
