@@ -2,15 +2,15 @@ package com.tenclouds.gaugeprogress
 
 import android.graphics.*
 
-class Track(centerPosition: PointF,
-            private val radiusPx: Float,
-            private val margin: Float,
-            private val color: Int,
-            private val startAngle: Float,
-            private val trackWidthPx: Float) : DrawableEntity(centerPosition) {
+class TrackDrawable(centerPosition: PointF,
+                    private val radiusPx: Float,
+                    private val margin: Float,
+                    private val color: Int,
+                    private val startAngle: Float,
+                    private val trackWidthPx: Float) : DrawableEntity(centerPosition) {
 
     private val paint = Paint().apply {
-        color = this@Track.color
+        color = this@TrackDrawable.color
         strokeWidth = trackWidthPx
         isAntiAlias = true
         strokeCap = Paint.Cap.ROUND

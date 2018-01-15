@@ -2,12 +2,12 @@ package com.tenclouds.gaugeprogress
 
 import android.graphics.*
 
-class Thumb(centerPosition: PointF,
-            var progress: Float,
-            private val gradientArray: IntArray,
-            private val startAngle: Float,
-            private val thumbRadius: Float,
-            gradientArrayPositions: FloatArray? = null) : DrawableEntity(centerPosition) {
+class ThumbDrawable(centerPosition: PointF,
+                    var progress: Float,
+                    private val gradientArray: IntArray,
+                    private val startAngle: Float,
+                    private val thumbRadius: Float,
+                    gradientArrayPositions: FloatArray? = null) : DrawableEntity(centerPosition) {
 
     private val gradientPositionsArray: FloatArray = gradientArrayPositions ?: FloatArray(gradientArray.size) { it.toFloat() / (gradientArray.size - 1) }
 

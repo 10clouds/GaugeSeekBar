@@ -32,9 +32,9 @@ class GaugeSeekBar : View {
     private var gradientArray = context.resources.getIntArray(R.array.index_gradient)
     private var gradientArrayPositions: FloatArray? = null
 
-    private var track: Track? = null
+    private var trackDrawable: TrackDrawable? = null
     private var progressDrawable: ProgressDrawable? = null
-    private var thumb: Thumb? = null
+    private var thumbDrawable: ThumbDrawable? = null
 
     var showThumb: Boolean = true
 
@@ -90,18 +90,18 @@ class GaugeSeekBar : View {
         val centerPosition = PointF(centerX, centerY)
         val radiusPx = Math.min(centerX, centerY)
         val margin = Math.max(thumbRadius, trackWidth / 2f)
-        track = Track(centerPosition, radiusPx, margin, trackColor, START_ANGLE_DEG, trackWidth)
+        trackDrawable = TrackDrawable(centerPosition, radiusPx, margin, trackColor, START_ANGLE_DEG, trackWidth)
         progressDrawable = ProgressDrawable(centerPosition, 0f, radiusPx, margin, gradientArray, START_ANGLE_DEG, trackWidth, gradientArrayPositions)
-        thumb = Thumb(centerPosition, 0f, gradientArray, START_ANGLE_DEG, thumbRadius)
+        thumbDrawable = ThumbDrawable(centerPosition, 0f, gradientArray, START_ANGLE_DEG, thumbRadius)
     }
 
     override fun onDraw(canvas: Canvas?) {
         canvas?.apply {
-            track?.draw(this)
+            trackDrawable?.draw(this)
             progressDrawable?.draw(this, progress)
 
             if (showThumb) {
-                thumb?.draw(canvas, progress)
+                thumbDrawable?.draw(canvas, progress)
             }
         }
     }
