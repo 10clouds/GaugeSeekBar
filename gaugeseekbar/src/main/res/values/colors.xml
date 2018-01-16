@@ -3,6 +3,7 @@
     <color name="green">#00FF00</color>
     <color name="red">#FF0000</color>
 
+    <color name="default_thumb_color">#ff6f00</color>
     <color name="default_track_color">#c3a9a9a9</color>
 
     <array name="default_index_gradient">
