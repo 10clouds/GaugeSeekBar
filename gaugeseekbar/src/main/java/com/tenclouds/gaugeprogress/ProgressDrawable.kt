@@ -11,7 +11,7 @@ class ProgressDrawable(position: PointF,
                        private val trackWidthPx: Float,
                        gradientPositionsArray: FloatArray? = null) : DrawableEntity(position) {
 
-    private val gradientPositionsArray: FloatArray = gradientPositionsArray ?: FloatArray(gradientArray.size) { it.toFloat() / gradientArray.size }
+    private val gradientPositionsArray: FloatArray = gradientPositionsArray ?: FloatArray(gradientArray.size) { it.toFloat() / (gradientArray.size - 1) }
 
     init {
         if (gradientArray.size != this.gradientPositionsArray.size)
@@ -24,7 +24,7 @@ class ProgressDrawable(position: PointF,
         strokeCap = Paint.Cap.ROUND
         style = Paint.Style.STROKE
 
-        if(gradientArray.size > 1) {
+        if (gradientArray.size > 1) {
             val shader = createSweepGradient()
             setShader(shader)
         } else {
