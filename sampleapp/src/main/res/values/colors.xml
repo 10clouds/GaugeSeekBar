@@ -4,6 +4,12 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
+    <array name="progressRainbow">
+        <item>@android:color/holo_blue_light</item>
+        <item>@android:color/holo_red_light</item>
+        <item>@android:color/holo_green_light</item>
+    </array>
+
     <array name="progressColor">
         <item>@color/colorPrimary</item>
     </array>

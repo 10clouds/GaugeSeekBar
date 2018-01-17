@@ -14,7 +14,7 @@ import com.tenclouds.gaugeseekbar.R
 class GaugeSeekBar : View {
 
     private companion object {
-        private const val START_ANGLE_DEG = 30f
+        private const val DEFAULT_START_ANGLE_DEG = 30f
         private const val DEFAULT_THUMB_RADIUS_DP = 11
         private const val DEFAULT_TRACK_WIDTH_DP = 8
     }
@@ -34,6 +34,7 @@ class GaugeSeekBar : View {
     private var progressGradientArray = context.resources.getIntArray(R.array.default_index_gradient)
     private var progressGradientArrayPositions: FloatArray? = null
     private var thumbColor: Int = ContextCompat.getColor(context, R.color.default_thumb_color)
+    private var startAngle = DEFAULT_START_ANGLE_DEG
 
     private var trackDrawable: TrackDrawable? = null
     private var progressDrawable: ProgressDrawable? = null
@@ -66,6 +67,7 @@ class GaugeSeekBar : View {
 
     private fun applyAttributes(attributes: TypedArray) {
         try {
+            startAngle = attributes.getFloat(R.styleable.GaugeSeekBar_startAngleDegrees, startAngle)
             thumbRadius = attributes.getDimension(R.styleable.GaugeSeekBar_thumbRadius, thumbRadius)
             thumbColor = attributes.getColor(R.styleable.GaugeSeekBar_thumbColor, thumbColor)
             val trackGradientArrayId = attributes.getResourceId(R.styleable.GaugeSeekBar_trackGradient, 0)
@@ -131,8 +133,8 @@ class GaugeSeekBar : View {
     }
 
     private fun angleToProgress(angle: Double): Float {
-        val availableAngle = 360 - 2 * START_ANGLE_DEG
-        val relativeAngle = angle - START_ANGLE_DEG
+        val availableAngle = 360 - 2 * startAngle
+        val relativeAngle = angle - startAngle
         return (relativeAngle / availableAngle).toFloat()
     }
 
@@ -140,9 +142,9 @@ class GaugeSeekBar : View {
         val centerPosition = PointF(centerX, centerY)
         val radiusPx = Math.min(centerX, centerY)
         val margin = Math.max(thumbRadius, trackWidth / 2f)
-        trackDrawable = TrackDrawable(centerPosition, radiusPx, margin, trackGradientArray, START_ANGLE_DEG, trackWidth)
-        progressDrawable = ProgressDrawable(centerPosition, progress, radiusPx, margin, progressGradientArray, START_ANGLE_DEG, trackWidth, progressGradientArrayPositions)
-        thumbDrawable = ThumbDrawable(centerPosition, thumbColor, progress, START_ANGLE_DEG, thumbRadius)
+        trackDrawable = TrackDrawable(centerPosition, radiusPx, margin, trackGradientArray, startAngle, trackWidth)
+        progressDrawable = ProgressDrawable(centerPosition, progress, radiusPx, margin, progressGradientArray, startAngle, trackWidth, progressGradientArrayPositions)
+        thumbDrawable = ThumbDrawable(centerPosition, thumbColor, progress, startAngle, thumbRadius)
     }
 
     override fun onDraw(canvas: Canvas?) {

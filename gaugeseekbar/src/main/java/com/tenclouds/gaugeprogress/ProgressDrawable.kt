@@ -35,7 +35,9 @@ class ProgressDrawable(position: PointF,
     private fun createSweepGradient(): SweepGradient {
         val shader = SweepGradient(centerPosition.x, centerPosition.y, gradientArray, getGradientPositions())
         val gradientRotationMatrix = Matrix()
-        gradientRotationMatrix.preRotate(90f + startAngle - 5, centerPosition.x, centerPosition.y)
+        //code need to account for path width
+        val angularMargin = Math.toDegrees(2 * Math.asin((trackWidthPx / radiusPx).toDouble())).toFloat()
+        gradientRotationMatrix.preRotate(90f + startAngle - angularMargin, centerPosition.x, centerPosition.y)
         shader.setLocalMatrix(gradientRotationMatrix)
         return shader
     }
