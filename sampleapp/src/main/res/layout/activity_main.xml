@@ -20,11 +20,12 @@
         android:id="@+id/progress2"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        app:progressGradient="@array/progressColor"
-        app:thumbColor="@color/colorPrimary"
+        app:interactive="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/progress1"
         app:layout_constraintTop_toTopOf="parent"
-        app:progress="0.75" />
+        app:progress="0.75"
+        app:progressGradient="@array/progressColor"
+        app:thumbColor="@color/colorPrimary" />
 
 </android.support.constraint.ConstraintLayout>

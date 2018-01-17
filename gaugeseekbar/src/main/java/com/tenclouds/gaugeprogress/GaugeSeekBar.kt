@@ -1,11 +1,13 @@
 package com.tenclouds.gaugeprogress
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.TypedArray
 import android.graphics.Canvas
 import android.graphics.PointF
 import android.support.v4.content.ContextCompat
 import android.util.AttributeSet
+import android.view.MotionEvent
 import android.view.View
 import com.tenclouds.gaugeseekbar.R
 
@@ -39,6 +41,8 @@ class GaugeSeekBar : View {
 
     var showThumb: Boolean = true
 
+    var interactive: Boolean = true
+
     var progress: Float = 0f
         set(value) {
             field = when {
@@ -48,6 +52,8 @@ class GaugeSeekBar : View {
             }
             invalidate()
         }
+
+    var progressChangedCallback: (progress: Float) -> Unit = {}
 
     init {
         setLayerType(LAYER_TYPE_SOFTWARE, null)
@@ -87,6 +93,7 @@ class GaugeSeekBar : View {
                 progressGradientArrayPositions = FloatArray(positionsIntArray.size) { positionsIntArray[it].div(100f) }
             }
 
+            interactive = attributes.getBoolean(R.styleable.GaugeSeekBar_interactive, interactive)
         } finally {
             attributes.recycle()
         }
@@ -96,6 +103,37 @@ class GaugeSeekBar : View {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
 
         init(measuredWidth / 2f, measuredHeight / 2f)
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    override fun onTouchEvent(event: MotionEvent): Boolean =
+            if (interactive) {
+                when (event.action) {
+                    MotionEvent.ACTION_DOWN -> {
+                        performClick()
+                        handleMotionEvent(event)
+                    }
+                    MotionEvent.ACTION_MOVE -> {
+                        handleMotionEvent(event)
+                    }
+                }
+                true
+            } else {
+                super.onTouchEvent(event)
+            }
+
+    private fun handleMotionEvent(event: MotionEvent) {
+        val relativeX = measuredWidth / 2f - event.x
+        val relativeY = event.y - measuredHeight / 2f
+        val angle = Math.toDegrees(Math.atan2(relativeX.toDouble(), relativeY.toDouble()))
+        progress = angleToProgress(if (angle > 0) angle else angle + 360f)
+        progressChangedCallback.invoke(progress)
+    }
+
+    private fun angleToProgress(angle: Double): Float {
+        val availableAngle = 360 - 2 * START_ANGLE_DEG
+        val relativeAngle = angle - START_ANGLE_DEG
+        return (relativeAngle / availableAngle).toFloat()
     }
 
     private fun init(centerX: Float, centerY: Float) {
