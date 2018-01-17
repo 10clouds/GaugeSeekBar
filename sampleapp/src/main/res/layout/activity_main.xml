@@ -13,8 +13,17 @@
         android:layout_height="100dp"
         app:layout_constraintEnd_toStartOf="@+id/progress2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:progress="0.45" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/progressText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/progress1"
+        app:layout_constraintLeft_toLeftOf="@id/progress1"
+        app:layout_constraintRight_toRightOf="@id/progress1"
+        app:layout_constraintTop_toTopOf="@id/progress1"
+        tools:text="0.1" />
 
     <com.tenclouds.gaugeprogress.GaugeSeekBar
         android:id="@+id/progress2"
