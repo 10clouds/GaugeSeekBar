@@ -1,3 +1,5 @@
+import groovy.json.JsonBuilder
+
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
@@ -33,4 +35,28 @@ dependencies {
 }
 repositories {
     mavenCentral()
+}
+
+ext {
+    libraryVersion = "1.0.0"
+    libraryRepo = 'gradle-dev'
+    libraryGroup = 'tenclouds'
+    libraryModule = 'gaugeseekbar'
+}
+
+task generateArtifactoryConfig {
+    def pattern = 'gaugeseekbar/build/outputs/aar/gaugeseekbar-release.aar'
+    def target = "${libraryRepo}/${libraryGroup}/${libraryModule}/${libraryVersion}/${libraryModule}-${libraryVersion}.aar"
+
+    def jsonBuilder = new JsonBuilder()
+    def contact = [[getPattern: { pattern }, getTarget: { target }]]
+    jsonBuilder { files contact.collect { [pattern: it.getPattern(), target: it.getTarget()] } }
+
+    def stringsFile = new File("artifactory.config")
+    stringsFile.delete()
+    stringsFile.write(jsonBuilder.toString())
+}
+
+build.doLast {
+    generateArtifactoryConfig.execute()
 }
