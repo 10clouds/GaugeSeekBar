@@ -3,7 +3,7 @@ package com.tenclouds.gaugeprogress
 import android.graphics.*
 
 class ProgressDrawable(position: PointF,
-                       var progress: Float,
+                       private var progress: Float,
                        private val radiusPx: Float,
                        private val margin: Float,
                        private val gradientArray: IntArray,
@@ -11,7 +11,13 @@ class ProgressDrawable(position: PointF,
                        private val trackWidthPx: Float,
                        gradientPositionsArray: FloatArray? = null) : DrawableEntity(position) {
 
-    private val gradientPositionsArray: FloatArray = gradientPositionsArray ?: FloatArray(gradientArray.size) { it.toFloat() / (gradientArray.size - 1) }
+    private val gradientPositionsArray: FloatArray =
+            if (gradientPositionsArray != null) {
+                getGradientPositions(gradientPositionsArray)
+            } else getGradientPositions(
+                    FloatArray(gradientArray.size) {
+                        it.toFloat() / (gradientArray.size - 1)
+                    })
 
     init {
         if (gradientArray.size != this.gradientPositionsArray.size)
@@ -33,7 +39,7 @@ class ProgressDrawable(position: PointF,
     }
 
     private fun createSweepGradient(): SweepGradient {
-        val shader = SweepGradient(centerPosition.x, centerPosition.y, gradientArray, getGradientPositions())
+        val shader = SweepGradient(centerPosition.x, centerPosition.y, gradientArray, gradientPositionsArray)
         val gradientRotationMatrix = Matrix()
         //code need to account for path width
         val angularMargin = Math.toDegrees(2 * Math.asin((trackWidthPx / radiusPx).toDouble())).toFloat()
@@ -42,12 +48,12 @@ class ProgressDrawable(position: PointF,
         return shader
     }
 
-    private fun getGradientPositions(): FloatArray {
+    private fun getGradientPositions(gradientPositions: FloatArray): FloatArray {
         val normalizedStartAngle = startAngle / 360f
         val normalizedAvailableSpace = 1f - 2 * normalizedStartAngle
 
-        return FloatArray(gradientArray.size) {
-            normalizedStartAngle + normalizedAvailableSpace * gradientPositionsArray[it]
+        return FloatArray(gradientPositions.size) {
+            normalizedStartAngle + normalizedAvailableSpace * gradientPositions[it]
         }
     }
 
