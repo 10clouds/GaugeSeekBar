@@ -3,6 +3,7 @@
     <declare-styleable name="GaugeSeekBar">
         <attr name="startAngleDegrees" format="float" />
         <attr name="thumbRadius" format="dimension" />
+        <attr name="thumbDrawable" format="reference" />
         <attr name="showThumb" format="boolean" />
         <attr name="thumbColor" format="color" />
         <attr name="trackGradient" format="color" />

@@ -19,9 +19,9 @@
         android:id="@+id/progressText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/progress1"
         app:layout_constraintLeft_toLeftOf="@id/progress1"
         app:layout_constraintRight_toRightOf="@id/progress1"
-        app:layout_constraintBottom_toBottomOf="@id/progress1"
         app:layout_constraintTop_toTopOf="@id/progress1"
         tools:text="0.1" />
 
@@ -39,10 +39,10 @@
 
     <com.tenclouds.gaugeprogress.GaugeSeekBar
         android:id="@+id/progress3"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         app:interactive="true"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/progress4"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/progress1"
         app:progress="0.75"
@@ -50,6 +50,20 @@
         app:showThumb="false"
         app:startAngleDegrees="90"
         app:thumbColor="@color/colorPrimary"
-        app:trackWidth="35dp" />
+        app:trackWidth="20dp" />
+
+    <com.tenclouds.gaugeprogress.GaugeSeekBar
+        android:id="@+id/progress4"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:interactive="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/progress3"
+        app:layout_constraintTop_toBottomOf="@+id/progress1"
+        app:thumbDrawable="@drawable/custom_thumb"
+        app:trackGradient="@array/progressRainbow"
+        app:startAngleDegrees="90"
+        app:thumbColor="@color/colorPrimary"
+        app:trackWidth="13dp" />
 
 </android.support.constraint.ConstraintLayout>

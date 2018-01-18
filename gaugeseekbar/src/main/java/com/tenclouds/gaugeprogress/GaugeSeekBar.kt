@@ -35,6 +35,7 @@ class GaugeSeekBar : View {
     private var progressGradientArrayPositions: FloatArray? = null
     private var thumbColor: Int = ContextCompat.getColor(context, R.color.default_thumb_color)
     private var startAngle = DEFAULT_START_ANGLE_DEG
+    private var thumbDrawableId: Int = 0
 
     private var trackDrawable: TrackDrawable? = null
     private var progressDrawable: ProgressDrawable? = null
@@ -100,6 +101,7 @@ class GaugeSeekBar : View {
             }
 
             interactive = attributes.getBoolean(R.styleable.GaugeSeekBar_interactive, interactive)
+            thumbDrawableId = attributes.getResourceId(R.styleable.GaugeSeekBar_thumbDrawable, 0)
         } finally {
             attributes.recycle()
         }
@@ -148,7 +150,7 @@ class GaugeSeekBar : View {
         val margin = Math.max(thumbRadius, trackWidth / 2f)
         trackDrawable = TrackDrawable(centerPosition, radiusPx, margin, trackGradientArray, startAngle, trackWidth)
         progressDrawable = ProgressDrawable(centerPosition, progress, radiusPx, margin, progressGradientArray, startAngle, trackWidth, progressGradientArrayPositions)
-        thumbEntity = ThumbEntity(centerPosition, thumbColor, progress, startAngle, thumbRadius)
+        thumbEntity = ThumbEntity(centerPosition, thumbColor, progress, startAngle, thumbRadius, if (thumbDrawableId != 0) ContextCompat.getDrawable(context, thumbDrawableId) else null)
     }
 
     override fun onDraw(canvas: Canvas?) {
