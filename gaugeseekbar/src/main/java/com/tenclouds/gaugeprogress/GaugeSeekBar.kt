@@ -38,7 +38,7 @@ class GaugeSeekBar : View {
 
     private var trackDrawable: TrackDrawable? = null
     private var progressDrawable: ProgressDrawable? = null
-    private var thumbDrawable: ThumbDrawable? = null
+    private var thumbEntity: ThumbEntity? = null
 
     var showThumb: Boolean = true
 
@@ -144,7 +144,7 @@ class GaugeSeekBar : View {
         val margin = Math.max(thumbRadius, trackWidth / 2f)
         trackDrawable = TrackDrawable(centerPosition, radiusPx, margin, trackGradientArray, startAngle, trackWidth)
         progressDrawable = ProgressDrawable(centerPosition, progress, radiusPx, margin, progressGradientArray, startAngle, trackWidth, progressGradientArrayPositions)
-        thumbDrawable = ThumbDrawable(centerPosition, thumbColor, progress, startAngle, thumbRadius)
+        thumbEntity = ThumbEntity(centerPosition, thumbColor, progress, startAngle, thumbRadius)
     }
 
     override fun onDraw(canvas: Canvas?) {
@@ -153,7 +153,7 @@ class GaugeSeekBar : View {
             progressDrawable?.draw(this, progress)
 
             if (showThumb) {
-                thumbDrawable?.draw(canvas, progress)
+                thumbEntity?.draw(canvas, progress)
             }
         }
     }

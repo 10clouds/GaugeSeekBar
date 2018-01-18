@@ -1,17 +1,9 @@
 package com.tenclouds.gaugeprogress
 
 import android.graphics.*
+import android.graphics.drawable.Drawable
 
-class ThumbDrawable(centerPosition: PointF,
-                    thumbColor: Int,
-                    var progress: Float,
-                    private val startAngle: Float,
-                    private val thumbRadius: Float) : DrawableEntity(centerPosition) {
-
-
-    companion object {
-        private const val DEGREE_TO_RADIAN_RATIO = 0.0174533
-    }
+class ThumbDrawable(thumbColor: Int) : Drawable() {
 
     private val whitePaint = Paint().apply {
         color = Color.WHITE
@@ -31,23 +23,15 @@ class ThumbDrawable(centerPosition: PointF,
         color = thumbColor
     }
 
-    fun draw(canvas: Canvas, progress: Float) {
-        this.progress = progress
-        draw(canvas)
-    }
-
     override fun draw(canvas: Canvas) {
-        val radius = Math.min(centerPosition.x, centerPosition.y) - thumbRadius
-
-        val angle = (startAngle + (360 - 2 * startAngle) * progress) * DEGREE_TO_RADIAN_RATIO
-
-        val indicatorX = centerPosition.x - Math.sin(angle) * radius
-        val indicatorY = Math.cos(angle) * radius + centerPosition.y
+        val centerX = bounds.exactCenterX()
+        val centerY = bounds.exactCenterY()
+        val radius = centerX - bounds.left
 
         canvas.apply {
-            drawCircle(indicatorX.toFloat(), indicatorY.toFloat(), thumbRadius, thumbOuterPaint)
-            drawCircle(indicatorX.toFloat(), indicatorY.toFloat(), thumbRadius / 2f, thumbInnerPaint)
-            drawCircle(indicatorX.toFloat(), indicatorY.toFloat(), 3f, whitePaint)
+            drawCircle(centerX, centerY, radius, thumbOuterPaint)
+            drawCircle(centerX, centerY, radius / 2f, thumbInnerPaint)
+            drawCircle(centerX, centerY, 3f, whitePaint)
         }
     }
 
@@ -56,6 +40,4 @@ class ThumbDrawable(centerPosition: PointF,
     override fun getOpacity(): Int = PixelFormat.TRANSLUCENT
 
     override fun setColorFilter(colorFilter: ColorFilter?) {}
-
-
 }
