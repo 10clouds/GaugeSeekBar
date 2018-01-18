@@ -41,23 +41,12 @@ class GaugeSeekBar : View {
     private var progressDrawable: ProgressDrawable? = null
     private var thumbEntity: ThumbEntity? = null
 
-    var showThumb: Boolean = true
-        set(value) {
-            field = value
-            invalidate()
-        }
+    private var showThumb: Boolean = true
+    private var showProgress: Boolean = true
+
+    private var progress: Float = 0f
 
     var interactive: Boolean = true
-
-    var progress: Float = 0f
-        set(value) {
-            field = when {
-                value in 0f..1f -> value
-                value > 1f -> 1f
-                else -> 0f
-            }
-            invalidate()
-        }
 
     var progressChangedCallback: (progress: Float) -> Unit = {}
 
@@ -65,8 +54,30 @@ class GaugeSeekBar : View {
         setLayerType(LAYER_TYPE_SOFTWARE, null)
     }
 
+    fun setShowThumb(showThumb: Boolean) {
+        this.showThumb = showThumb
+        invalidate()
+
+    }
+
+    fun setShowProgress(showProgress: Boolean) {
+        this.showProgress = showProgress
+        invalidate()
+    }
+
+    fun getShowProgress() = showProgress
+
     fun setTrackWidthDp(trackWidthDp: Int) {
         trackWidth = trackWidthDp * resources.displayMetrics.density
+        invalidate()
+    }
+
+    fun setProgress(progress: Float) {
+        this.progress = when {
+            progress in 0f..1f -> progress
+            progress > 1f -> 1f
+            else -> 0f
+        }
         invalidate()
     }
 
@@ -102,6 +113,7 @@ class GaugeSeekBar : View {
 
             interactive = attributes.getBoolean(R.styleable.GaugeSeekBar_interactive, interactive)
             thumbDrawableId = attributes.getResourceId(R.styleable.GaugeSeekBar_thumbDrawable, 0)
+            showProgress = attributes.getBoolean(R.styleable.GaugeSeekBar_showProgress, showProgress)
         } finally {
             attributes.recycle()
         }
@@ -134,7 +146,7 @@ class GaugeSeekBar : View {
         val relativeX = measuredWidth / 2f - event.x
         val relativeY = event.y - measuredHeight / 2f
         val angle = Math.toDegrees(Math.atan2(relativeX.toDouble(), relativeY.toDouble()))
-        progress = angleToProgress(if (angle > 0) angle else angle + 360f)
+        setProgress(angleToProgress(if (angle > 0) angle else angle + 360f))
         progressChangedCallback.invoke(progress)
     }
 
@@ -149,18 +161,21 @@ class GaugeSeekBar : View {
         val radiusPx = Math.min(centerX, centerY)
         val margin = Math.max(thumbRadius, trackWidth / 2f)
         trackDrawable = TrackDrawable(centerPosition, radiusPx, margin, trackGradientArray, startAngle, trackWidth)
-        progressDrawable = ProgressDrawable(centerPosition, progress, radiusPx, margin, progressGradientArray, startAngle, trackWidth, progressGradientArrayPositions)
-        thumbEntity = ThumbEntity(centerPosition, thumbColor, progress, startAngle, thumbRadius, if (thumbDrawableId != 0) ContextCompat.getDrawable(context, thumbDrawableId) else null)
+
+        if (showProgress) {
+            progressDrawable = ProgressDrawable(centerPosition, progress, radiusPx, margin, progressGradientArray, startAngle, trackWidth, progressGradientArrayPositions)
+        }
+
+        if (showThumb) {
+            thumbEntity = ThumbEntity(centerPosition, thumbColor, progress, startAngle, thumbRadius, if (thumbDrawableId != 0) ContextCompat.getDrawable(context, thumbDrawableId) else null)
+        }
     }
 
     override fun onDraw(canvas: Canvas?) {
         canvas?.apply {
             trackDrawable?.draw(this)
             progressDrawable?.draw(this, progress)
-
-            if (showThumb) {
-                thumbEntity?.draw(canvas, progress)
-            }
+            thumbEntity?.draw(canvas, progress)
         }
     }
 }

@@ -60,10 +60,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/progress3"
         app:layout_constraintTop_toBottomOf="@+id/progress1"
-        app:thumbDrawable="@drawable/custom_thumb"
-        app:trackGradient="@array/progressRainbow"
+        app:showProgress="false"
         app:startAngleDegrees="90"
         app:thumbColor="@color/colorPrimary"
+        app:thumbDrawable="@drawable/custom_thumb"
+        app:trackGradient="@array/progressRainbow"
         app:trackWidth="13dp" />
 
 </android.support.constraint.ConstraintLayout>

@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
     private fun initProgress1View() {
         val initialProgress = 0.1f
         progressText.text = String.format("%.2f", initialProgress)
-        progress1.progress = initialProgress
+        progress1.setProgress(initialProgress)
 
         progress1.progressChangedCallback = {
             progressText.text = String.format("%.2f", it)

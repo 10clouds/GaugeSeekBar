@@ -7,6 +7,7 @@
         <attr name="showThumb" format="boolean" />
         <attr name="thumbColor" format="color" />
         <attr name="trackGradient" format="color" />
+        <attr name="showProgress" format="boolean" />
         <attr name="trackGradientPositions" format="reference" />
         <attr name="progress" format="float" />
         <attr name="interactive" format="boolean" />
