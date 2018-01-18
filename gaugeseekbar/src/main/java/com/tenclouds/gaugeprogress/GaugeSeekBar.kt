@@ -41,6 +41,10 @@ class GaugeSeekBar : View {
     private var thumbEntity: ThumbEntity? = null
 
     var showThumb: Boolean = true
+        set(value) {
+            field = value
+            invalidate()
+        }
 
     var interactive: Boolean = true
 
