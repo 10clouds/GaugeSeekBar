@@ -1,20 +1,18 @@
 package com.tenclouds.gaugeseekbar
 
-import android.graphics.*
+import android.graphics.Canvas
+import android.graphics.PointF
 import android.graphics.drawable.Drawable
 
 class ThumbEntity(private val centerPosition: PointF,
-                  thumbColor: Int,
                   private var progress: Float,
                   private val startAngle: Float,
                   private val thumbRadius: Float,
-                  drawable: Drawable? = null) {
+                  private val thumbDrawable: Drawable) {
 
     companion object {
         private const val DEGREE_TO_RADIAN_RATIO = 0.0174533
     }
-
-    private val thumbDrawable = drawable ?: ThumbDrawable(thumbColor)
 
     fun draw(canvas: Canvas, progress: Float) {
         this.progress = progress

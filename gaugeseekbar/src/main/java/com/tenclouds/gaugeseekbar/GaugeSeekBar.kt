@@ -166,7 +166,8 @@ class GaugeSeekBar : View {
         }
 
         if (showThumb) {
-            thumbEntity = ThumbEntity(centerPosition, thumbColor, progress, startAngle, thumbRadius, if (thumbDrawableId != 0) ContextCompat.getDrawable(context, thumbDrawableId) else null)
+            val thumbDrawable = if (thumbDrawableId != 0) ContextCompat.getDrawable(context, thumbDrawableId)!! else ThumbDrawable(thumbColor)
+            thumbEntity = ThumbEntity(centerPosition, progress, startAngle, thumbRadius, thumbDrawable)
         }
     }
 
