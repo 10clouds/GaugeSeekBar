@@ -1,4 +1,4 @@
-package com.tenclouds.gaugeprogress
+package com.tenclouds.gaugeseekbar
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -9,7 +9,6 @@ import android.support.v4.content.ContextCompat
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
-import com.tenclouds.gaugeseekbar.R
 
 class GaugeSeekBar : View {
 

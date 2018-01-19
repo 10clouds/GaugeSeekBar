@@ -7,7 +7,7 @@
     android:padding="12dp"
     tools:context="com.tenclouds.gaugeprogressbar.MainActivity">
 
-    <com.tenclouds.gaugeprogress.GaugeSeekBar
+    <com.tenclouds.gaugeseekbar.GaugeSeekBar
         android:id="@+id/progress1"
         android:layout_width="100dp"
         android:layout_height="100dp"
@@ -25,7 +25,7 @@
         app:layout_constraintTop_toTopOf="@id/progress1"
         tools:text="0.1" />
 
-    <com.tenclouds.gaugeprogress.GaugeSeekBar
+    <com.tenclouds.gaugeseekbar.GaugeSeekBar
         android:id="@+id/progress2"
         android:layout_width="100dp"
         android:layout_height="100dp"
@@ -37,7 +37,7 @@
         app:progressGradient="@array/progressColor"
         app:thumbColor="@color/colorPrimary" />
 
-    <com.tenclouds.gaugeprogress.GaugeSeekBar
+    <com.tenclouds.gaugeseekbar.GaugeSeekBar
         android:id="@+id/progress3"
         android:layout_width="100dp"
         android:layout_height="100dp"
@@ -52,7 +52,7 @@
         app:thumbColor="@color/colorPrimary"
         app:trackWidth="20dp" />
 
-    <com.tenclouds.gaugeprogress.GaugeSeekBar
+    <com.tenclouds.gaugeseekbar.GaugeSeekBar
         android:id="@+id/progress4"
         android:layout_width="100dp"
         android:layout_height="100dp"
