@@ -5,6 +5,8 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
 
+apply from: 'dependencies.gradle'
+
 android {
     compileSdkVersion 27
     defaultConfig {
@@ -33,15 +35,9 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
+
 repositories {
     mavenCentral()
-}
-
-ext {
-    libraryVersion = "1.0.0"
-    libraryRepo = 'gradle-dev'
-    libraryGroup = 'tenclouds'
-    libraryModule = 'gaugeseekbar'
 }
 
 task generateArtifactoryConfig {
