@@ -14,9 +14,19 @@ class ThumbEntity(private val centerPosition: PointF,
         private const val DEGREE_TO_RADIAN_RATIO = 0.0174533
     }
 
+    init {
+        updatePosition(progress)
+    }
+
     fun draw(canvas: Canvas, progress: Float) {
         this.progress = progress
 
+        updatePosition(progress)
+
+        thumbDrawable.draw(canvas)
+    }
+
+    private fun updatePosition(progress: Float) {
         val seekbarRadius = Math.min(centerPosition.x, centerPosition.y) - thumbRadius
 
         val angle = (startAngle + (360 - 2 * startAngle) * progress) * DEGREE_TO_RADIAN_RATIO
@@ -29,7 +39,5 @@ class ThumbEntity(private val centerPosition: PointF,
                 (indicatorY - thumbRadius).toInt(),
                 (indicatorX + thumbRadius).toInt(),
                 (indicatorY + thumbRadius).toInt())
-
-        thumbDrawable.draw(canvas)
     }
 }

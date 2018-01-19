@@ -34,6 +34,12 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    androidTestCompile "org.mockito:mockito-android:2.8.47"
+    androidTestCompile("com.nhaarman:mockito-kotlin:1.5.0", {
+        exclude group: 'org.jetbrains.kotlin'
+        exclude group: 'org.mockito'
+    })
 }
 
 repositories {

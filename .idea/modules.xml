@@ -7,9 +7,7 @@
       <module fileurl="file://F:\Dev\GaugeSeekBar\sampleapp\app.iml" filepath="F:\Dev\GaugeSeekBar\sampleapp\app.iml" />
       <module fileurl="file://F:\Dev\GaugeSeekBar\gaugeseekbar\gaugeprogress.iml" filepath="F:\Dev\GaugeSeekBar\gaugeseekbar\gaugeprogress.iml" />
       <module fileurl="file://$PROJECT_DIR$/gaugeseekbar/gaugeseekbar.iml" filepath="$PROJECT_DIR$/gaugeseekbar/gaugeseekbar.iml" />
-      <module fileurl="file://F:\Dev\GaugeSeekBar\gaugeseekbar\gaugeseekbar.iml" filepath="F:\Dev\GaugeSeekBar\gaugeseekbar\gaugeseekbar.iml" />
       <module fileurl="file://$PROJECT_DIR$/sampleapp/sampleapp.iml" filepath="$PROJECT_DIR$/sampleapp/sampleapp.iml" />
-      <module fileurl="file://F:\Dev\GaugeSeekBar\sampleapp\sampleapp.iml" filepath="F:\Dev\GaugeSeekBar\sampleapp\sampleapp.iml" />
     </modules>
   </component>
 </project>
