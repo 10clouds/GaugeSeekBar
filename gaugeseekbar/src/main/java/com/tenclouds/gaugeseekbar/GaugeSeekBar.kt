@@ -80,6 +80,8 @@ class GaugeSeekBar : View {
         invalidate()
     }
 
+    fun getProgress() = progress
+
     private fun applyAttributes(attributes: TypedArray) {
         try {
             startAngle = attributes.getFloat(R.styleable.GaugeSeekBar_startAngleDegrees, startAngle)
