@@ -1,4 +1,4 @@
-package com.tenclouds.gaugeprogress
+package com.tenclouds.gaugeseekbar
 
 import android.graphics.PointF
 import android.graphics.drawable.Drawable
