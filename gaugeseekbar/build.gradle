@@ -5,6 +5,8 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
 
+apply from: 'dependencies.gradle'
+
 android {
     compileSdkVersion 27
     defaultConfig {
@@ -27,21 +29,24 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
+
     implementation 'com.android.support:appcompat-v7:27.0.2'
+    implementation 'com.android.support:design:27.0.2'
+
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-}
-repositories {
-    mavenCentral()
+
+    androidTestCompile "org.mockito:mockito-android:2.8.47"
+    androidTestCompile("com.nhaarman:mockito-kotlin:1.5.0", {
+        exclude group: 'org.jetbrains.kotlin'
+        exclude group: 'org.mockito'
+    })
 }
 
-ext {
-    libraryVersion = "1.0.0"
-    libraryRepo = 'gradle-dev'
-    libraryGroup = 'tenclouds'
-    libraryModule = 'gaugeseekbar'
+repositories {
+    mavenCentral()
 }
 
 task generateArtifactoryConfig {
