@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/GaugeProgressBar.iml" filepath="$PROJECT_DIR$/GaugeProgressBar.iml" />
       <module fileurl="file://F:\Dev\GaugeSeekBar\GaugeProgressBar.iml" filepath="F:\Dev\GaugeSeekBar\GaugeProgressBar.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/GaugeSeekBar.iml" filepath="$PROJECT_DIR$/.idea/GaugeSeekBar.iml" />
       <module fileurl="file://F:\Dev\GaugeSeekBar\sampleapp\app.iml" filepath="F:\Dev\GaugeSeekBar\sampleapp\app.iml" />

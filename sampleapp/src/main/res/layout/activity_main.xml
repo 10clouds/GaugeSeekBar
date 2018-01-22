@@ -1,70 +1,20 @@
-<?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<android.support.v4.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/drawerLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="12dp"
-    tools:context="com.tenclouds.gaugeprogressbar.MainActivity">
+    android:layout_height="match_parent">
 
-    <com.tenclouds.gaugeseekbar.GaugeSeekBar
-        android:id="@+id/progress1"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        app:layout_constraintEnd_toStartOf="@+id/progress2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <!-- The main content view -->
+    <FrameLayout
+        android:id="@+id/content_frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
-    <TextView
-        android:id="@+id/progressText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@id/progress1"
-        app:layout_constraintLeft_toLeftOf="@id/progress1"
-        app:layout_constraintRight_toRightOf="@id/progress1"
-        app:layout_constraintTop_toTopOf="@id/progress1"
-        tools:text="0.1" />
-
-    <com.tenclouds.gaugeseekbar.GaugeSeekBar
-        android:id="@+id/progress2"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        app:interactive="false"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/progress1"
-        app:layout_constraintTop_toTopOf="parent"
-        app:progress="0.75"
-        app:progressGradient="@array/progressColor"
-        app:thumbColor="@color/colorPrimary" />
-
-    <com.tenclouds.gaugeseekbar.GaugeSeekBar
-        android:id="@+id/progress3"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        app:interactive="true"
-        app:layout_constraintEnd_toStartOf="@+id/progress4"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/progress1"
-        app:progress="0.75"
-        app:progressGradient="@array/progressRainbow"
-        app:showThumb="false"
-        app:startAngleDegrees="90"
-        app:thumbColor="@color/colorPrimary"
-        app:trackWidth="20dp" />
-
-    <com.tenclouds.gaugeseekbar.GaugeSeekBar
-        android:id="@+id/progress4"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        app:interactive="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/progress3"
-        app:layout_constraintTop_toBottomOf="@+id/progress1"
-        app:showProgress="false"
-        app:startAngleDegrees="90"
-        app:thumbColor="@color/colorPrimary"
-        app:thumbDrawable="@drawable/custom_thumb"
-        app:trackGradient="@array/progressRainbow"
-        app:trackWidth="13dp" />
-
-</android.support.constraint.ConstraintLayout>
+    <!-- The navigation drawer -->
+    <ListView
+        android:id="@+id/navigationDrawer"
+        android:layout_width="200dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="#ffeeeeee"/>
+</android.support.v4.widget.DrawerLayout>

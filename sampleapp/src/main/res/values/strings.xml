@@ -1,3 +1,9 @@
 <resources>
-    <string name="app_name">GaugeProgressBar</string>
+    <string name="app_name">GaugeSeekBar</string>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+    <string name="update_gauge_seekbar">Update gauge seekbar</string>
+    <string name="unstyled_seekbar">Unstyled seekbar</string>
+    <string name="animated_progress">Animated progress</string>
+    <string name="custom_thumb">Custom Thumb</string>
 </resources>
