@@ -31,6 +31,7 @@ class GaugeSeekBar : View {
 
     private var thumbRadius = DEFAULT_THUMB_RADIUS_DP * resources.displayMetrics.density
     private var trackWidth = DEFAULT_TRACK_WIDTH_DP * resources.displayMetrics.density
+    private var progressWidth = DEFAULT_TRACK_WIDTH_DP * resources.displayMetrics.density
     private var trackGradientArray: IntArray = context.resources.getIntArray(R.array.default_track_gradient)
     private var progressGradientArray = context.resources.getIntArray(R.array.default_index_gradient)
     private var progressGradientArrayPositions: FloatArray? = null
@@ -56,24 +57,21 @@ class GaugeSeekBar : View {
     }
 
     /**
-     * Calling this method will invalidate the view
+     * Set whether thumb is visible. To update the view call invalidate().
      *
      * @param showThumb When set to false yhumb will not be drawn
      */
     fun setShowThumb(showThumb: Boolean) {
         this.showThumb = showThumb
-        invalidate()
-
     }
 
     /**
-     * Calling this method will invalidate the view
+     * Set wheter progress bar is visible. To update the view call invalidate().
      *
      * @param showProgress When set to false progress bar will not be drawn
      */
     fun setShowProgress(showProgress: Boolean) {
         this.showProgress = showProgress
-        invalidate()
     }
 
     /**
@@ -82,37 +80,63 @@ class GaugeSeekBar : View {
     fun getShowProgress() = showProgress
 
     /**
-     * Set track width in dp and invalidate the view
+     * Set track width in dp. To update the view call invalidate().
      *
      * @param trackWidthDp Track width in dp
      */
     fun setTrackWidthDp(trackWidthDp: Int) {
         trackWidth = trackWidthDp * resources.displayMetrics.density
-        invalidate()
     }
 
     /**
-     * Set track width in pixels and invalidate the view
+     * Set track width in pixels. To update the view call invalidate().
      *
      * @param trackWidth Track width in pixels
      */
     fun setTrackWidth(trackWidth: Float) {
         this.trackWidth = trackWidth
-        invalidate()
     }
 
     /**
-     * Set track width from dimension resource
+     * Set track width from dimension resource. To update the view call invalidate().
      *
      * @param widthDimensId Dimension resource id
      */
     fun setTrackWidth(@DimenRes widthDimensId: Int) {
         trackWidth = context.resources.getDimension(widthDimensId)
-        invalidate()
     }
 
     /**
+     * Set progress width in dp. To update the view call invalidate().
      *
+     * @param progressWidthDp Progress bar width in dp
+     */
+    fun setProgressWidthDp(progressWidthDp: Float) {
+        this.progressWidth = progressWidthDp
+    }
+
+    /**
+     * Set progress width in pixels. To update the view call invalidate().
+     *
+     * @param progressWidth Progress bar width in pixels
+     */
+    fun setProgressWidth(progressWidth: Float) {
+        this.progressWidth = progressWidth
+    }
+
+    /**
+     * Set progress width from dimension resource. To update the view call invalidate().
+     *
+     * @param progressWidthResourceId Progress bar width dimension resource
+     */
+    fun setProgressWidth(@DimenRes progressWidthResourceId: Int) {
+        progressWidth = context.resources.getDimension(progressWidthResourceId)
+    }
+
+    /**
+     * Set progress and invalidate the view
+     *
+     * @param progress Progress from 0.0 to 1.0
      */
     fun setProgress(@FloatRange(from = 0.0, to = 1.0) progress: Float) {
         this.progress = when {
@@ -145,6 +169,7 @@ class GaugeSeekBar : View {
             }
 
             showThumb = attributes.getBoolean(R.styleable.GaugeSeekBar_showThumb, showThumb)
+            progressWidth = attributes.getDimension(R.styleable.GaugeSeekBar_progressWidth, progressWidth)
             trackWidth = attributes.getDimension(R.styleable.GaugeSeekBar_trackWidth, trackWidth)
             progress = attributes.getFloat(R.styleable.GaugeSeekBar_progress, 0f)
 
@@ -210,7 +235,7 @@ class GaugeSeekBar : View {
         trackDrawable = TrackDrawable(centerPosition, radiusPx, margin, trackGradientArray, startAngle, trackWidth)
 
         if (showProgress) {
-            progressDrawable = ProgressDrawable(centerPosition, progress, radiusPx, margin, progressGradientArray, startAngle, trackWidth, progressGradientArrayPositions)
+            progressDrawable = ProgressDrawable(centerPosition, progress, radiusPx, margin, progressGradientArray, startAngle, progressWidth, progressGradientArrayPositions)
         }
 
         if (showThumb) {

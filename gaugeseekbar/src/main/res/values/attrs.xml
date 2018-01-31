@@ -12,6 +12,7 @@
         <attr name="progress" format="float" />
         <attr name="interactive" format="boolean" />
         <attr name="trackWidth" format="dimension" />
+        <attr name="progressWidth" format="dimension" />
         <attr name="progressGradient" format="reference" />
         <attr name="progressGradientPositions" format="reference" />
     </declare-styleable>
