@@ -5,6 +5,8 @@ import android.content.Context
 import android.content.res.TypedArray
 import android.graphics.Canvas
 import android.graphics.PointF
+import android.support.annotation.DimenRes
+import android.support.annotation.FloatRange
 import android.support.v4.content.ContextCompat
 import android.util.AttributeSet
 import android.view.MotionEvent
@@ -29,6 +31,7 @@ class GaugeSeekBar : View {
 
     private var thumbRadius = DEFAULT_THUMB_RADIUS_DP * resources.displayMetrics.density
     private var trackWidth = DEFAULT_TRACK_WIDTH_DP * resources.displayMetrics.density
+    private var progressWidth = DEFAULT_TRACK_WIDTH_DP * resources.displayMetrics.density
     private var trackGradientArray: IntArray = context.resources.getIntArray(R.array.default_track_gradient)
     private var progressGradientArray = context.resources.getIntArray(R.array.default_index_gradient)
     private var progressGradientArrayPositions: FloatArray? = null
@@ -53,25 +56,89 @@ class GaugeSeekBar : View {
         setLayerType(LAYER_TYPE_SOFTWARE, null)
     }
 
+    /**
+     * Set whether thumb is visible. To update the view call invalidate().
+     *
+     * @param showThumb When set to false yhumb will not be drawn
+     */
     fun setShowThumb(showThumb: Boolean) {
         this.showThumb = showThumb
-        invalidate()
-
     }
 
+    /**
+     * Set wheter progress bar is visible. To update the view call invalidate().
+     *
+     * @param showProgress When set to false progress bar will not be drawn
+     */
     fun setShowProgress(showProgress: Boolean) {
         this.showProgress = showProgress
-        invalidate()
     }
 
+    /**
+     * @return boolean indicating whether progress bar is visible
+     */
     fun getShowProgress() = showProgress
 
+    /**
+     * Set track width in dp. To update the view call invalidate().
+     *
+     * @param trackWidthDp Track width in dp
+     */
     fun setTrackWidthDp(trackWidthDp: Int) {
         trackWidth = trackWidthDp * resources.displayMetrics.density
-        invalidate()
     }
 
-    fun setProgress(progress: Float) {
+    /**
+     * Set track width in pixels. To update the view call invalidate().
+     *
+     * @param trackWidth Track width in pixels
+     */
+    fun setTrackWidth(trackWidth: Float) {
+        this.trackWidth = trackWidth
+    }
+
+    /**
+     * Set track width from dimension resource. To update the view call invalidate().
+     *
+     * @param widthDimensId Dimension resource id
+     */
+    fun setTrackWidth(@DimenRes widthDimensId: Int) {
+        trackWidth = context.resources.getDimension(widthDimensId)
+    }
+
+    /**
+     * Set progress width in dp. To update the view call invalidate().
+     *
+     * @param progressWidthDp Progress bar width in dp
+     */
+    fun setProgressWidthDp(progressWidthDp: Float) {
+        this.progressWidth = progressWidthDp
+    }
+
+    /**
+     * Set progress width in pixels. To update the view call invalidate().
+     *
+     * @param progressWidth Progress bar width in pixels
+     */
+    fun setProgressWidth(progressWidth: Float) {
+        this.progressWidth = progressWidth
+    }
+
+    /**
+     * Set progress width from dimension resource. To update the view call invalidate().
+     *
+     * @param progressWidthResourceId Progress bar width dimension resource
+     */
+    fun setProgressWidth(@DimenRes progressWidthResourceId: Int) {
+        progressWidth = context.resources.getDimension(progressWidthResourceId)
+    }
+
+    /**
+     * Set progress and invalidate the view
+     *
+     * @param progress Progress from 0.0 to 1.0
+     */
+    fun setProgress(@FloatRange(from = 0.0, to = 1.0) progress: Float) {
         this.progress = when {
             progress in 0f..1f -> progress
             progress > 1f -> 1f
@@ -80,6 +147,9 @@ class GaugeSeekBar : View {
         invalidate()
     }
 
+    /**
+     * @return Progress as float in range from 0.0 to 1.0
+     */
     fun getProgress() = progress
 
     private fun applyAttributes(attributes: TypedArray) {
@@ -99,6 +169,7 @@ class GaugeSeekBar : View {
             }
 
             showThumb = attributes.getBoolean(R.styleable.GaugeSeekBar_showThumb, showThumb)
+            progressWidth = attributes.getDimension(R.styleable.GaugeSeekBar_progressWidth, progressWidth)
             trackWidth = attributes.getDimension(R.styleable.GaugeSeekBar_trackWidth, trackWidth)
             progress = attributes.getFloat(R.styleable.GaugeSeekBar_progress, 0f)
 
@@ -164,7 +235,7 @@ class GaugeSeekBar : View {
         trackDrawable = TrackDrawable(centerPosition, radiusPx, margin, trackGradientArray, startAngle, trackWidth)
 
         if (showProgress) {
-            progressDrawable = ProgressDrawable(centerPosition, progress, radiusPx, margin, progressGradientArray, startAngle, trackWidth, progressGradientArrayPositions)
+            progressDrawable = ProgressDrawable(centerPosition, progress, radiusPx, margin, progressGradientArray, startAngle, progressWidth, progressGradientArrayPositions)
         }
 
         if (showThumb) {
