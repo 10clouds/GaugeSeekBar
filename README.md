@@ -13,7 +13,7 @@ allprojects {
 }
 
 dependencies {
-    compile(group: 'tenclouds', name: 'gaugeseekbar', version: '1.0.0', ext: 'aar')
+    compile(group: 'tenclouds', name: 'gaugeseekbar', version: '1.0.1', ext: 'aar')
 }
 ```
 
