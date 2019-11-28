@@ -1,5 +1,7 @@
 package com.tenclouds.gaugeseekbar
 
+import android.animation.ObjectAnimator
+import android.animation.TimeInterpolator
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.TypedArray
@@ -11,6 +13,7 @@ import android.support.v4.content.ContextCompat
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
+import android.view.animation.DecelerateInterpolator
 
 class GaugeSeekBar : View {
 
@@ -145,6 +148,29 @@ class GaugeSeekBar : View {
             else -> 0f
         }
         invalidate()
+    }
+
+    /**
+     * Set progress and invalidate the view
+     *
+     * @param progress Progress from 0.0 to 1.0
+     * @param duration animation time in milliseconds
+     * @param interpolator type of animation interpolator (DecelerateInterpolator,
+     *        AccelerateDecelerateInterpolator etc)
+     */
+    fun setProgressAnimated(@FloatRange(from = 0.0, to = 1.0) progress: Float,
+                            duration: Long = 1000,
+                            interpolator: TimeInterpolator = DecelerateInterpolator()) {
+        val filteredProgress = when {
+            progress in 0f..1f -> progress
+            progress > 1f -> 1f
+            else -> 0f
+        }
+
+        val animation = ObjectAnimator.ofFloat(this, "progress", filteredProgress)
+        animation.duration = duration
+        animation.interpolator = interpolator
+        animation.start()
     }
 
     /**
